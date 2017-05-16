@@ -2,7 +2,7 @@
 
 ### Development environment
 
- - Install docker tools, see further instructions (here)[https://www.docker.com/products/overview]
+ - Install docker tools, see further instructions [here](https://www.docker.com/products/overview)
  - Get up and running `docker-compose up -d`, execute only once
  - Connect to app container `docker exec -it pa.to /bin/bash`
   - Execute your commands like you are coding in your bare metal machine
