@@ -1,6 +1,6 @@
 # PA.TO 
 
-<img src="http://www.clipartbest.com/cliparts/9Tz/6RB/9Tz6RBexc.png" alt="Duck" style="width: 100px; height: 100px;"/>
+![Duck](http://www.clipartbest.com/cliparts/9Tz/6RB/9Tz6RBexc.png =100x100)
 
 ### Development environment
 
