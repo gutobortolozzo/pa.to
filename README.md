@@ -1,4 +1,4 @@
-# PA.TO `:bowtie:`
+# PA.TO 
 
 ### Development environment
 
