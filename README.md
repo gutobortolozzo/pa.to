@@ -1,4 +1,6 @@
-# PA.TO
+# PA.TO 
+
+<img src="http://www.clipartbest.com/cliparts/9Tz/6RB/9Tz6RBexc.png" alt="Duck" style="width: 100px; height: 100px;"/>
 
 ### Development environment
 
