@@ -1,6 +1,6 @@
 # PA.TO 
 
-![Duck](http://www.clipartbest.com/cliparts/9Tz/6RB/9Tz6RBexc.png =100x100)
+![Duck](http://www.clipartbest.com/cliparts/9Tz/6RB/9Tz6RBexc.png)
 
 ### Development environment
 
