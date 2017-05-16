@@ -1,0 +1,16 @@
+[
+    {
+        "model": "URL",
+        "data": {
+            "key"   : 23720,
+            "link" : "pa.to"
+        }
+    },
+    {
+        "model": "URL",
+        "data": {
+            "key"   : 11200,
+            "link" : "https://www.pa.to"
+        }
+    }
+]

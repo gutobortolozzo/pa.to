@@ -1,0 +1,33 @@
+{
+    "name": "pa.to",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "npm run unity && npm run functional",
+        "unity": "./node_modules/.bin/mocha --recursive test/unity/",
+        "functional": "./node_modules/.bin/mocha --recursive test/functional/"
+    },
+    "keywords": [
+        "shorten"
+    ],
+    "author": "Guto Bortolozzo <gutobortolozzo@gmail.com> (https://github.com/gutobortolozzo/)",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.15.2",
+        "express-useragent": "^1.0.7",
+        "pg": "^6.1.5",
+        "pg-hstore": "^2.3.2",
+        "bluebird": "2.9.30",
+        "continuation-local-storage": "3.1.4",
+        "sequelize": "3.24.1",
+        "sequelize-cli": "^2.4.0",
+        "sequelize-fixtures": "0.5.4"
+    },
+    "devDependencies": {
+        "mocha": "^3.3.0",
+        "sequelize-fixtures": "0.5.4",
+        "should": "^11.2.1"
+    }
+}
