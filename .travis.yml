@@ -15,7 +15,7 @@ before_script:
   - docker-compose up -d
 
 script:
-  - docker exec pa.to /bin/sh -c "node_modules/.bin/sequelize db:migrate && npm test"
+  - docker exec pa.to /bin/sh -c "./node_modules/.bin/sequelize db:migrate && npm test"
 
 after_script:
   - docker-compose down
