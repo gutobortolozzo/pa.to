@@ -1,0 +1,21 @@
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+language: node_js
+  - "7.10"
+
+notifications:
+  email: false
+
+before_script:
+  - sudo service mysql stop || true
+  - docker-compose up -d
+
+script:
+  - docker exec lucy_api /bin/sh -c "node_modules/.bin/sequelize db:migrate && npm test"
+
+after_script:
+  - docker-compose down
