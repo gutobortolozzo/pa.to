@@ -13,6 +13,8 @@ notifications:
 before_script:
   - sudo service postgresql stop || true
   - docker-compose up -d
+  - sleep 10
+  - docker exec postgres /bin/bash -c "psql -U postgres -c 'CREATE DATABASE development'"
 
 script:
   - docker exec pa.to /bin/sh -c "npm install && ./node_modules/.bin/sequelize db:migrate && npm test"
