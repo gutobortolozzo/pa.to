@@ -11,7 +11,7 @@ notifications:
   email: false
 
 before_script:
-  - sudo service mysql stop || true
+  - sudo service postgresql stop || true
   - docker-compose up -d
 
 script:
