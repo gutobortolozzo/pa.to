@@ -1,4 +1,4 @@
-# PA.TO 
+# PA.TO [![Build Status](https://travis-ci.org/gutobortolozzo/pa.to.svg?branch=master)](https://travis-ci.org/gutobortolozzo/pa.to) 
 
 ### Development environment
 
