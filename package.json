@@ -15,12 +15,13 @@
     "author": "Guto Bortolozzo <gutobortolozzo@gmail.com> (https://github.com/gutobortolozzo/)",
     "license": "ISC",
     "dependencies": {
+        "bluebird": "2.9.30",
+        "bull": "^3.0.0-alpha.4",
+        "continuation-local-storage": "3.1.4",
         "express": "^4.15.2",
         "express-useragent": "^1.0.7",
         "pg": "^6.1.5",
         "pg-hstore": "^2.3.2",
-        "bluebird": "2.9.30",
-        "continuation-local-storage": "3.1.4",
         "sequelize": "3.24.1",
         "sequelize-cli": "^2.4.0",
         "sequelize-fixtures": "0.5.4"
