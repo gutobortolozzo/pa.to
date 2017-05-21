@@ -1,5 +1,5 @@
 const publish = require('../queue/publish');
-const events = require('../queue/events');
+const queues = require('../queue/queues');
 
 module.exports = (key) => {
 
@@ -7,5 +7,5 @@ module.exports = (key) => {
         key
     };
 
-    publish(events.access, data);
+    publish(queues.access, data);
 };

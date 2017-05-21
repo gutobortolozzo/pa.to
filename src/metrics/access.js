@@ -1,13 +1,16 @@
 const db = require('../../models');
 
-const accessed = async (keyId) => {
+const decode = require('../shortener/decode');
+
+const accessed = (key) => {
+
+    const decodedKey = decode(key);
 
     const body = {
-        key : keyId
+        key : decodedKey
     };
 
-    const accessEntity = await db.Access.create(body);
+    return db.Access.create(body);
 };
-
 
 module.exports.accessed = accessed;

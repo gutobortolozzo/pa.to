@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     const Access = sequelize.define('Access', {
         key: {
             type: DataTypes.INTEGER,
+            primaryKey: true
         },
         createdAt: {
             type: DataTypes.DATE,
