@@ -2,9 +2,11 @@ const db = require('../../models');
 const glob = require("glob");
 const express = require('express');
 const useragent = require('express-useragent');
+const bodyParser = require('body-parser');
 
 const server = express();
 server.use(useragent.express());
+server.use(bodyParser.json());
 
 const transactionalHandler = async (handler, request, response) => {
 
