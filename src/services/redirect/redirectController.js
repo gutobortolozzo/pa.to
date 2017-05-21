@@ -28,7 +28,7 @@ const redirect = async (request, response) => {
         return response;
     }
 
-    response.redirect(301, urlEntity.link);
+    response.redirect(302, urlEntity.link);
     return response;
 };
 

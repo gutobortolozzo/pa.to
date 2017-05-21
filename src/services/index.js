@@ -27,9 +27,13 @@ const registerRoute = (route, controller) => {
 
     server[method](route, async (request, response, next) => {
 
+        console.time('request');
+
         await transactionalHandler(controllerInterface.handler, request, response);
 
         next();
+
+        console.timeEnd('request');
     });
 };
 

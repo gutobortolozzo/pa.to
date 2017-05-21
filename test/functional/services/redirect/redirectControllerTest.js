@@ -16,7 +16,7 @@ describe('Redirect controller', () => {
 
         const response = await redirectController['/:key'].handler(request, new ResponseMock());
 
-        response.statusCode.should.be.eql(301);
+        response.statusCode.should.be.eql(302);
         response.content.should.be.eql('pa.to');
     });
 
@@ -30,7 +30,7 @@ describe('Redirect controller', () => {
 
         const response = await redirectController['/:key'].handler(request, new ResponseMock());
 
-        response.statusCode.should.be.eql(301);
+        response.statusCode.should.be.eql(302);
         response.content.should.be.eql('https://www.pa.to');
     });
 
