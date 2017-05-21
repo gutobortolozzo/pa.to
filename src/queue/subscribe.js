@@ -1,8 +1,6 @@
-const queue = require('./conector');
+module.exports = (queue, callback) => {
 
-module.exports = (event, callback) => {
-
-    queue.process(event, async (job, done) => {
+    queue.process(async (job, done) => {
 
         try{
             await callback(job.data);

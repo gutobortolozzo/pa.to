@@ -1,0 +1,11 @@
+const publish = require('../queue/publish');
+const events = require('../queue/events');
+
+module.exports = (key) => {
+
+    const data = {
+        key
+    };
+
+    publish(events.access, data);
+};

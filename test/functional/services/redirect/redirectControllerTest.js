@@ -1,6 +1,6 @@
 require('should');
 const ResponseMock = require('../response');
-const transactionUtil = require('../transactionUtils');
+const transactionUtil = require('../../transactionUtils');
 const fixture = require('./redirectControllerFixture.json');
 const redirectController = require('../../../../src/services/redirect/redirectController');
 

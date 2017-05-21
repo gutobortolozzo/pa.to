@@ -1,7 +1,7 @@
 require('should');
 const db = require('../../../../models');
 const ResponseMock = require('../response');
-const transactionUtil = require('../transactionUtils');
+const transactionUtil = require('../../transactionUtils');
 const shortenerController = require('../../../../src/services/shortener/shortenerController');
 
 describe('Shortener controller', () => {
