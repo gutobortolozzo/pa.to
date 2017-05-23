@@ -1,4 +1,4 @@
-const db = require('../../../models');
+const db = require('../../models/index');
 const sequelizeFixtures = require('sequelize-fixtures');
 
 module.exports.transactionalTestHooks = (fixture) => {

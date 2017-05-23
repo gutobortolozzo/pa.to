@@ -1,6 +1,6 @@
 const db = require('../../../models');
 const decode = require('../../shortener/decode');
-const encode = require('../../shortener/encode');
+const enqueueAccess = require('../../metrics/enqueue');
 
 const redirect = async (request, response) => {
 
@@ -27,6 +27,8 @@ const redirect = async (request, response) => {
         response.send({ error : "key not found" });
         return response;
     }
+
+    enqueueAccess(key);
 
     response.redirect(302, urlEntity.link);
     return response;

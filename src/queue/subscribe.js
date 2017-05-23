@@ -1,11 +1,11 @@
-const queue = require('./conector');
+const db = require('../../models');
 
-module.exports = (event, callback) => {
+module.exports = (queue, callback) => {
 
-    queue.process(event, async (job, done) => {
+    queue.process(async (job, done) => {
 
         try{
-            await callback(job.data);
+            db.sequelize.transaction(async () => await callback(job.data));
             done();
         } catch(err){
             done(err);

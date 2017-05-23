@@ -4,18 +4,18 @@
         "password": "postgres",
         "database": "development",
         "host": "postgres",
-        "dialect": "postgres",
-        "pool": {
-            "max": 5,
-            "min": 1,
-            "idle": 10000
-        }
+        "dialect": "postgres"
     },
     "production": {
-        "username": "",
-        "password": null,
-        "database": "",
-        "host": "",
-        "dialect": ""
+        "username": "postgres",
+        "password": "postgres",
+        "database": "production",
+        "host": "postgres",
+        "dialect": "postgres",
+        "pool": {
+            "max": 10,
+            "min": 5,
+            "idle": 10000
+        }
     }
 }

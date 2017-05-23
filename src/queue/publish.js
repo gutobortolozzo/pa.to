@@ -1,5 +1,3 @@
-const queue = require('./conector');
-
 const jobOptions = {
     attempts: 3,
     backoff: {
@@ -10,8 +8,7 @@ const jobOptions = {
     removeOnFail: true
 };
 
-module.exports = (event, data) => {
+module.exports = (queue, data) => {
 
-    queue.add(event, data, jobOptions);
-
+    queue.add(data, jobOptions);
 };
