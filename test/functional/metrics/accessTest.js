@@ -31,5 +31,13 @@ describe('Metrics access', () => {
             });
     });
 
+    it('should throw error when no hash is provided', async () => {
+
+        await access.accessed()
+            .catch(error => {
+                error.message.should.be.eql('no valid hash provided');
+            });
+    });
+
     transactionUtil.transactionalTestHooks();
 });

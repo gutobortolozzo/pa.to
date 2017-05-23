@@ -4,6 +4,9 @@ const decode = require('../shortener/decode');
 
 const accessed = (key) => {
 
+    if(!key || !key instanceof String)
+        return Promise.reject(new Error('no valid hash provided'));
+
     const decodedKey = decode(key);
 
     const body = {

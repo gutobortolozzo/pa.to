@@ -1,5 +1,7 @@
 const publish = require('../queue/publish');
+const subscribe = require('../queue/subscribe');
 const queues = require('../queue/queues');
+const access = require('./access');
 
 module.exports = (key) => {
 
@@ -9,3 +11,10 @@ module.exports = (key) => {
 
     publish(queues.access, data);
 };
+
+subscribe(queues.access, async (data) => {
+
+    if(process.env.NODE_ENV != 'production') return;
+
+    await access.accessed(data.key);
+});
