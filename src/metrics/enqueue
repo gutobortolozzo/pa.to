@@ -3,18 +3,25 @@ const subscribe = require('../queue/subscribe');
 const queues = require('../queue/queues');
 const access = require('./access');
 
-module.exports = (key) => {
+module.exports = (key, request) => {
 
     const data = {
-        key
+        key,
+        userAgent : request.useragent,
+        ip        : request.ip
     };
 
     publish(queues.access, data);
 };
 
-subscribe(queues.access, async (data) => {
+subscribe(queues.access, (data) => {
 
     if(process.env.NODE_ENV != 'production') return;
 
-    await access.accessed(data.key);
+    const userAgentFields = access.userAgent(data.userAgent);
+
+    return access.geoLocationAddress(data.ip)
+        .then(geoLocation => {
+            return access.accessed(data.key, userAgentFields, geoLocation);
+        });
 });

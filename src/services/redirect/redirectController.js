@@ -28,7 +28,7 @@ const redirect = async (request, response) => {
         return response;
     }
 
-    enqueueAccess(key);
+    enqueueAccess(key, request);
 
     response.redirect(302, urlEntity.link);
     return response;

@@ -5,6 +5,8 @@ const useragent = require('express-useragent');
 const bodyParser = require('body-parser');
 
 const server = express();
+
+server.enable('trust proxy');
 server.use(useragent.express());
 server.use(bodyParser.json());
 
