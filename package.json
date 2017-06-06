@@ -7,7 +7,8 @@
         "start": "node index.js",
         "test": "npm run unity && npm run functional",
         "unity": "./node_modules/.bin/mocha --recursive test/unity/",
-        "functional": "./node_modules/.bin/mocha --recursive test/functional/"
+        "functional": "./node_modules/.bin/mocha --recursive test/functional/",
+        "migrate": "./node_modules/.bin/sequelize db:migrate"
     },
     "keywords": [
         "shorten"
