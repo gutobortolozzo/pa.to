@@ -27,7 +27,7 @@ const userAgent = (userAgent) => {
     return {
         isMobile  : userAgent.isMobile,
         isDesktop : userAgent.isDesktop,
-        isBot     : userAgent.isBot,
+        isBot     : (!userAgent.isMobile && !userAgent.isDesktop) || userAgent.isBot,
         browser   : userAgent.browser || userAgentDefaultValue,
         version   : userAgent.version || userAgentDefaultValue,
         platform  : userAgent.platform || userAgentDefaultValue,
