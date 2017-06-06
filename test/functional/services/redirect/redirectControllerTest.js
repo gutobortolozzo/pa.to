@@ -50,6 +50,3 @@ describe('Redirect controller', () => {
 
     transactionUtil.transactionalTestHooks(fixture);
 });
-
-console.log(require('../../../../src/shortener/encode')(23720));
-console.log(require('../../../../src/shortener/encode')(11200));
