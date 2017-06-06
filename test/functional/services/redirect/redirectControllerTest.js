@@ -10,7 +10,7 @@ describe('Redirect controller', () => {
 
         const request = {
             params : {
-                key : "$AA"
+                key : "$:5"
             }
         };
 
@@ -24,7 +24,7 @@ describe('Redirect controller', () => {
 
         const request = {
             params : {
-                key : "mTP"
+                key : "FzI"
             }
         };
 
@@ -50,3 +50,6 @@ describe('Redirect controller', () => {
 
     transactionUtil.transactionalTestHooks(fixture);
 });
+
+console.log(require('../../../../src/shortener/encode')(23720));
+console.log(require('../../../../src/shortener/encode')(11200));
