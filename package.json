@@ -8,7 +8,8 @@
         "test": "npm run unity && npm run functional",
         "unity": "./node_modules/.bin/mocha --recursive test/unity/",
         "functional": "./node_modules/.bin/mocha --recursive test/functional/",
-        "migrate": "./node_modules/.bin/sequelize db:migrate"
+        "migrate": "./node_modules/.bin/sequelize db:migrate",
+        "production" : "NODE_ENV=production npm run start"
     },
     "keywords": [
         "shorten"

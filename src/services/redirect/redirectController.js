@@ -12,6 +12,8 @@ const redirect = async (request, response) => {
         return response;
     }
 
+    console.log('Request key', key);
+
     const decodedKey = decode(key);
 
     const query = {

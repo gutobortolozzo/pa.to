@@ -10,6 +10,18 @@ server.enable('trust proxy');
 server.use(useragent.express());
 server.use(bodyParser.json());
 
+server.use(async (request, response, next) => {
+
+    console.time('request');
+
+    const timeEnd = () => console.timeEnd('request');
+
+    response.on('finish', timeEnd);
+    response.on('close', timeEnd);
+
+    next();
+});
+
 const transactionalHandler = async (handler, request, response) => {
 
     const transactionOptions = {
@@ -29,13 +41,9 @@ const registerRoute = (route, controller) => {
 
     server[method](route, async (request, response, next) => {
 
-        console.time('request');
-
         await transactionalHandler(controllerInterface.handler, request, response);
 
         next();
-
-        console.timeEnd('request');
     });
 };
 

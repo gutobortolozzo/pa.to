@@ -1,4 +1,4 @@
-# PA.TO [![Build Status](https://travis-ci.org/gutobortolozzo/pa.to.svg?branch=master)](https://travis-ci.org/gutobortolozzo/pa.to) 
+# PA.TO [![Build Status](https://travis-ci.org/pa-to/pa.to.svg?branch=master)](https://travis-ci.org/gutobortolozzo/pa.to) 
 
 ### Development environment
 
@@ -23,3 +23,10 @@
  - `npm test`
   - All tests run inside a transaction that will be rollbacked after each test
   - Since container is configured to `development` mode you must run app to sync entities
+  
+  
+### Services
+  
+  - Main entrypoints
+    - `/shortener` `POST` `body { url : '...' }`
+    - `/:key` `GET`
