@@ -9,7 +9,7 @@
         "unity": "./node_modules/.bin/mocha --recursive test/unity/",
         "functional": "./node_modules/.bin/mocha --recursive test/functional/",
         "migrate": "./node_modules/.bin/sequelize db:migrate",
-        "production" : "NODE_ENV=production npm run start"
+        "production": "NODE_ENV=production npm run start"
     },
     "keywords": [
         "shorten"
@@ -24,6 +24,7 @@
         "continuation-local-storage": "3.1.4",
         "express": "^4.15.2",
         "express-useragent": "^1.0.7",
+        "glob": "^7.1.2",
         "pg": "^6.1.5",
         "pg-hstore": "^2.3.2",
         "sequelize": "3.24.1",

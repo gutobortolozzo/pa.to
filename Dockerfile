@@ -1,4 +1,4 @@
-FROM node:7.10
+FROM node:8.1
 
 ENV APP_HOME /app
 ENV NODE_ENV production

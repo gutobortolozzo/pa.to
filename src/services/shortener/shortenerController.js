@@ -1,6 +1,9 @@
 const db = require('../../../models');
 const link = require('../../link/link');
 const encode = require('../../shortener/encode');
+const ttlJob = require('../../jobs/ttlJob');
+
+const URL = "http://pa.to/";
 
 const shortener = async (request, response) => {
 
@@ -20,8 +23,14 @@ const shortener = async (request, response) => {
 
     const encoded = encode(urlEntity.key);
 
+    const responseBody = {
+        key : encoded,
+        ttl : ttlJob.daysToKeepData,
+        url : `${URL}${encoded}`
+    };
+
     response.status(200);
-    response.send(encoded);
+    response.send(responseBody);
 
     return response;
 };

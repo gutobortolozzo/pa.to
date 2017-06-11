@@ -19,7 +19,9 @@ describe('Shortener controller', () => {
         await shortenerController['/shortener'].handler(request, response);
 
         response.statusCode.should.be.eql(200);
-        response.content.should.be.ok();
+        response.content.key.should.be.ok();
+        response.content.ttl.should.be.ok();
+        response.content.url.should.containEql('http://pa.to/');
     });
 
     it('should not shorten www.pa.to', async () => {
@@ -35,7 +37,7 @@ describe('Shortener controller', () => {
         await shortenerController['/shortener'].handler(request, response);
 
         response.statusCode.should.be.eql(400);
-        response.content.should.be.ok();
+        response.content.error.should.be.eql("invalid URL");
     });
 
     transactionUtil.transactionalTestHooks();

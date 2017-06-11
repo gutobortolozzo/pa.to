@@ -12,9 +12,12 @@ server.use(bodyParser.json());
 
 server.use(async (request, response, next) => {
 
-    console.time('request');
+    const timeStart = Date.now();
 
-    const timeEnd = () => console.timeEnd('request');
+    const timeEnd = () => {
+        const total = Date.now() - timeStart;
+        console.log('request', total, 'ms')
+    };
 
     response.on('finish', timeEnd);
     response.on('close', timeEnd);
