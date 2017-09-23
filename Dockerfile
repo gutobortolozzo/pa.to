@@ -6,7 +6,7 @@ FROM node:8.1
 ENV APP_HOME /app
 ENV NODE_ENV production
 ENV PORT 9003
-ENV BASE_URL http://shows.to/
+ENV BASE_URL https://shows.to/
 
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
