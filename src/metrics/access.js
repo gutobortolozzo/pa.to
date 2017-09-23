@@ -1,6 +1,5 @@
-const db = require('../../models');
-const decode = require('../shortener/decode');
 const axios = require('axios');
+const accessModel = require('../models/access');
 
 const userAgentDefaultValue = 'other';
 const locationDefaultValue = 'N/A';
@@ -11,15 +10,14 @@ const accessed = (key, userAgentFields, geoLocation) => {
     if(!key || !key instanceof String)
         return Promise.reject(new Error('no valid hash provided'));
 
-    const decodedKey = decode(key);
-
     const accesskey = {
-        key : decodedKey
+        key  : key,
+        date : new Date()
     };
 
-    const body = Object.assign(accesskey, userAgentFields, geoLocation);
+    const model = Object.assign(accesskey, userAgentFields, geoLocation);
 
-    return db.Access.create(body);
+    return accessModel.create(model);
 };
 
 const userAgent = (userAgent) => {

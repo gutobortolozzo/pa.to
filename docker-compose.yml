@@ -5,6 +5,7 @@ app:
   command: bash -c 'while [ true ]; do sleep 10; done'
   environment:
     - NODE_ENV=development
+    - BASE_URL=http://shows.to/
     - REDIS_MASTER_SERVICE_PORT=6379
     - REDIS_MASTER_SERVICE_HOST=redis_pato
   volumes:
@@ -14,19 +15,8 @@ app:
   expose:
     - 9003
   links:
-    - db:db
+    - rdb1:rdb1
     - cache:cache
-
-db:
-  image: postgres:9.5.4
-  container_name: postgres
-  ports:
-    - 5432:5432
-  expose:
-    - 5432
-  environment:
-    - POSTGRES_PASSWORD=postgres
-    - POSTGRES_USER=postgres
 
 cache:
   image: redis:3.0.7
@@ -35,3 +25,35 @@ cache:
     - 6379:6379
   expose:
     - 6379
+
+rdb1:
+  image: kallqvist/rethinkdb-cluster
+  container_name: rethink_1
+  ports:
+    - 8080:8080
+  volumes:
+    - ./data/rdb01:/data
+
+rdb2:
+  image: kallqvist/rethinkdb-cluster
+  container_name: rethink_2
+  links:
+    - rdb1
+  environment:
+    JOIN: rdb1
+  ports:
+    - 8081:8080
+  volumes:
+    - ./data/rdb02:/data
+
+rdb3:
+  image: kallqvist/rethinkdb-cluster
+  container_name: rethink_3
+  links:
+    - rdb1
+  environment:
+    JOIN: rdb1
+  ports:
+    - 8082:8080
+  volumes:
+    - ./data/rdb03:/data

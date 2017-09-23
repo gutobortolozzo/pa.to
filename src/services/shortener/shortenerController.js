@@ -1,11 +1,9 @@
-const db = require('../../../models');
 const link = require('../../link/link');
-const encode = require('../../shortener/encode');
-const ttlJob = require('../../jobs/ttlJob');
+const urlModel = require('../../models/url');
 
-const URL = "http://pa.to/";
+const URL = process.env.BASE_URL;
 
-const shortener = async (request, response) => {
+const shortener = (request, response) => {
 
     const url = request.body.url;
 
@@ -17,22 +15,16 @@ const shortener = async (request, response) => {
         return;
     }
 
-    const urlEntity = await db.URL.create({
-        link: url
-    });
+    return urlModel.create(url)
+        .then(record => {
+            const responseBody = {
+                key : record.key,
+                url : `${URL}${record.key}`
+            };
 
-    const encoded = encode(urlEntity.key);
-
-    const responseBody = {
-        key : encoded,
-        ttl : ttlJob.daysToKeepData,
-        url : `${URL}${encoded}`
-    };
-
-    response.status(200);
-    response.send(responseBody);
-
-    return response;
+            response.status(200);
+            response.send(responseBody);
+        })
 };
 
 module.exports = {

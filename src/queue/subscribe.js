@@ -1,14 +1,13 @@
-const db = require('../../models');
-
 module.exports = (queue, callback) => {
 
-    queue.process(async (job, done) => {
+    queue.process((job, done) => {
 
-        try{
-            db.sequelize.transaction(async () => await callback(job.data));
-            done();
-        } catch(err){
-            done(err);
-        }
+        callback(job.data)
+            .then(_ => {
+                done();
+            })
+            .catch(err => {
+                done(err);
+            });
     });
 };

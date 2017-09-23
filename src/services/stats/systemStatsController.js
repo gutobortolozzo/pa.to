@@ -7,7 +7,7 @@ const redirect = (request, response) => {
 
     if(!key){
         response.status(400);
-        response.send({ error : "invalid key requested" });
+        response.send({ error : "invalid key" });
         return Promise.resolve();
     }
 
@@ -24,7 +24,7 @@ const redirect = (request, response) => {
 };
 
 module.exports = {
-    '/:key' : {
+    '/api/system/stats' : {
         method  : 'GET',
         handler : redirect
     }

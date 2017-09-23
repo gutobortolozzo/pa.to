@@ -1,6 +1,15 @@
-const server = require('./src/services/index');
 const port = parseInt(process.env.PORT);
 
-require('./src/jobs/ttlJob').register();
+const migrations = require('./src/migrations/migrations');
 
-server.listen(port, _ => console.log(`listening on port ${port}`));
+migrations.migrate()
+    .then(_ => {
+
+        const server = require('./src/services/index');
+        return server.listen(port, _ => console.log(`listening on port ${port}`));
+    })
+    .catch(err => {
+        console.log("SIGTERM ERROR", err);
+
+        process.exit(1);
+    });

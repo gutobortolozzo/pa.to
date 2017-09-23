@@ -16,8 +16,6 @@ module.exports = (key, request) => {
 
 subscribe(queues.access, (data) => {
 
-    if(process.env.NODE_ENV != 'production') return;
-
     const userAgentFields = access.userAgent(data.userAgent);
 
     return access.geoLocationAddress(data.ip)

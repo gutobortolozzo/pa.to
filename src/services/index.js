@@ -1,40 +1,32 @@
-const db = require('../../models');
+const Promise = require('bluebird');
 const glob = require("glob");
 const express = require('express');
 const useragent = require('express-useragent');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const server = express();
 
 server.enable('trust proxy');
 server.use(useragent.express());
 server.use(bodyParser.json());
+server.use(cors());
 
-server.use(async (request, response, next) => {
+// server.use(async (request, response, next) => {
+//
+//     const timeStart = Date.now();
+//
+//     const timeEnd = () => {
+//         const total = Date.now() - timeStart;
+//         console.log('request', total, 'ms')
+//     };
+//
+//     response.on('finish', timeEnd);
+//     response.on('close', timeEnd);
+//
+//     next();
+// });
 
-    const timeStart = Date.now();
-
-    const timeEnd = () => {
-        const total = Date.now() - timeStart;
-        console.log('request', total, 'ms')
-    };
-
-    response.on('finish', timeEnd);
-    response.on('close', timeEnd);
-
-    next();
-});
-
-const transactionalHandler = async (handler, request, response) => {
-
-    const transactionOptions = {
-        autocommit: false
-    };
-
-    await db.sequelize.transaction(transactionOptions, async () => {
-        await handler(request, response);
-    });
-};
 
 const registerRoute = (route, controller) => {
 
@@ -42,11 +34,12 @@ const registerRoute = (route, controller) => {
 
     const method = controllerInterface.method.toLowerCase();
 
-    server[method](route, async (request, response, next) => {
+    server[method](route, (request, response, next) => {
 
-        await transactionalHandler(controllerInterface.handler, request, response);
-
-        next();
+        return Promise.resolve(controllerInterface.handler(request, response))
+            .finally(_ => {
+                next();
+            });
     });
 };
 
@@ -59,7 +52,10 @@ const globOptions = {
 };
 
 const controllersPaths = glob.sync("**/*Controller.js", globOptions);
-const controllers = controllersPaths.map((controller) => require(`./${controller}`));
+const controllers = controllersPaths.map((controller) => {
+    console.log(controller);
+    return require(`./${controller}`);
+});
 
 controllers.forEach(registerController);
 
