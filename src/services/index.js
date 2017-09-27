@@ -4,6 +4,7 @@ const express = require('express');
 const useragent = require('express-useragent');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const stats = require('../stats/stats');
 
 const server = express();
 
@@ -11,22 +12,6 @@ server.enable('trust proxy');
 server.use(useragent.express());
 server.use(bodyParser.json());
 server.use(cors());
-
-// server.use(async (request, response, next) => {
-//
-//     const timeStart = Date.now();
-//
-//     const timeEnd = () => {
-//         const total = Date.now() - timeStart;
-//         console.log('request', total, 'ms')
-//     };
-//
-//     response.on('finish', timeEnd);
-//     response.on('close', timeEnd);
-//
-//     next();
-// });
-
 
 const registerRoute = (route, controller) => {
 
@@ -58,5 +43,21 @@ const controllers = controllersPaths.map((controller) => {
 });
 
 controllers.forEach(registerController);
+
+server.use((request, response, next) => {
+
+    const timeStart = Date.now();
+
+    const timeEnd = () => {
+        const total = Date.now() - timeStart;
+        stats(request.route.path, total);
+    };
+
+    response.on('finish', timeEnd);
+    response.on('close', timeEnd);
+
+    next();
+});
+
 
 module.exports = server;

@@ -1,4 +1,3 @@
-const shortid = require('shortid');
 const rethink = require('rethinkdb');
 const database = require('../database/database');
 
@@ -23,6 +22,31 @@ module.exports.count = (modelKey) => {
     return database.getConnection()
         .then(connection => {
             return rethink.table(table)('key').count(modelKey).run(connection);
+        });
+};
+
+module.exports.countAll = () => {
+
+    return database.getConnection()
+        .then(connection => {
+            return rethink.table(table).count().run(connection);
+        });
+};
+
+module.exports.stats = () => {
+    return database.getConnection()
+        .then(connection => {
+            return rethink.table(table).group('country').map(function(group){
+                return {
+                    name: group("country") || "",
+                    count: 1
+                }
+            }).reduce(function(left, right) {
+                return {
+                    name: right("name"),
+                    count: left("count").add(right("count"))
+                }
+            }).run(connection);
         });
 };
 

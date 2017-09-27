@@ -27,6 +27,14 @@ module.exports.create = (link) => {
         })
 };
 
+module.exports.countAll = () => {
+
+    return database.getConnection()
+        .then(connection => {
+            return rethink.table(table).count().run(connection);
+        });
+};
+
 module.exports.getByKey = (key) => {
     return database.getConnection()
         .then(connection => {

@@ -1,26 +1,27 @@
+const statsModel = require('../../models/stats');
 const urlModel = require('../../models/url');
-const enqueueAccess = require('../../metrics/enqueue');
+const accessModel = require('../../models/access');
 
 const redirect = (request, response) => {
 
-    const key = request.params.key;
+    const promises = [
+        statsModel.groupedByEndpoint(),
+        urlModel.countAll(),
+        accessModel.countAll()
+    ];
 
-    if(!key){
-        response.status(400);
-        response.send({ error : "invalid key" });
-        return Promise.resolve();
-    }
+    return Promise.all(promises)
+        .then(([groupedStats, totalUrls, totalAccess]) => {
 
-    return urlModel.getByKey(key)
-        .then(record => {
-            if(!record){
-                response.status(400);
-                response.send({ error : "key not found" });
-            } else {
-                enqueueAccess(key, request);
-                response.redirect(302, record.link);
-            }
-        })
+            const data = {
+                endpoints : groupedStats,
+                urls      : totalUrls,
+                accesses  : totalAccess
+            };
+
+            response.status(200);
+            response.send(data);
+        });
 };
 
 module.exports = {

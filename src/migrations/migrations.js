@@ -30,6 +30,19 @@ module.exports.migrate = () => {
             return module.exports.createIndexIfNotExist('access', 'key');
         })
         .then(_ => {
+
+            const tableConfig = {
+                shards: 2,
+                replicas: 2,
+                durability: "soft"
+            };
+
+            return module.exports.createTableIfNotExist("stats", tableConfig);
+        })
+        .then(_ => {
+            return module.exports.createIndexIfNotExist('stats', 'key');
+        })
+        .then(_ => {
             console.log('DONE');
         });
 
