@@ -50,7 +50,9 @@ server.use((request, response, next) => {
 
     const timeEnd = () => {
         const total = Date.now() - timeStart;
-        stats(request.route.path, total);
+        if(request.route){
+            stats(request.route.path, total);
+        }
     };
 
     response.on('finish', timeEnd);
