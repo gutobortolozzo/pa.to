@@ -1,5 +1,6 @@
 const link = require('../../link/link');
 const urlModel = require('../../models/url');
+const slackNotifications = require('../../notifications/slack');
 
 const URL = process.env.BASE_URL;
 
@@ -24,7 +25,9 @@ const shortener = (request, response) => {
 
             response.status(200);
             response.send(responseBody);
-        })
+
+            slackNotifications.shortened(url, responseBody.key, responseBody.url);
+        });
 };
 
 module.exports = {

@@ -12,19 +12,20 @@
   "author": "João Bortolozzo <gutobortolozzo@gmail.com> (https://github.com/gutobortolozzo/)",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.16.1",
+    "@slack/client": "^3.14.1",
+    "axios": "^0.16.2",
     "bluebird": "2.9.30",
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.2",
     "bull": "^2.2.6",
     "cors": "^2.8.4",
-    "express": "^4.15.2",
-    "express-useragent": "^1.0.7",
+    "express": "^4.16.2",
+    "express-useragent": "^1.0.8",
     "glob": "^7.1.2",
     "rethinkdb": "^2.3.3",
     "shortid": "^2.2.8"
   },
   "devDependencies": {
-    "mocha": "^3.3.0",
+    "mocha": "^3.5.3",
     "should": "^11.2.1"
   }
 }

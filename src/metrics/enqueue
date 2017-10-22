@@ -2,6 +2,7 @@ const publish = require('../queue/publish');
 const subscribe = require('../queue/subscribe');
 const queues = require('../queue/queues');
 const access = require('./access');
+const slackNotifications = require('../notifications/slack');
 
 module.exports = (key, request) => {
 
@@ -20,6 +21,13 @@ subscribe(queues.access, (data) => {
 
     return access.geoLocationAddress(data.ip)
         .then(geoLocation => {
-            return access.accessed(data.key, userAgentFields, geoLocation);
+
+            return Promise.all([
+                access.accessed(data.key, userAgentFields, geoLocation),
+                geoLocation
+            ]);
+        })
+        .then(([model, geolocation]) => {
+            slackNotifications.accessed(data.key, geolocation.city, geolocation.country, userAgentFields.platform);
         });
 });
